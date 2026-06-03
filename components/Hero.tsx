@@ -17,17 +17,17 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-[10px] mb-6">
           <a
             href="#"
-            className="flex items-center gap-[10px] text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
+            className="flex items-center gap-[10px] text-black text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
             style={{ background: '#8BC34A', width: '265px', height: '48px', paddingTop: '12px', paddingBottom: '12px', paddingLeft: '32px', paddingRight: '32px', borderRadius: '8px' }}
           >
             <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.42c1.42.07 2.4.74 3.22.8 1.23-.24 2.4-.94 3.72-.84 1.58.13 2.77.72 3.54 1.84-3.25 1.97-2.48 6.35.51 7.57-.62 1.5-1.39 2.98-3 3.49zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+              <path d="M3 20.5v-17c0-.83 1-.9 1.27-.28L12 12l-7.73 8.78C4 21.4 3 21.33 3 20.5zM13.73 13.73l2.08 2.08-9.4 5.44 7.32-7.52zM20.23 11.3c.6.34.6 1.06 0 1.4l-2.82 1.63-2.3-2.33 2.3-2.33 2.82 1.63zM6.41 4.75l9.4 5.44-2.08 2.08-7.32-7.52z" />
             </svg>
             Download for Android
           </a>
           <a
             href="#"
-            className="flex items-center gap-[10px] text-white text-sm font-medium hover:opacity-90 transition-opacity"
+            className="flex items-center gap-[10px] text-black text-sm font-medium hover:opacity-90 transition-opacity"
             style={{ background: '#8BC34A', width: '265px', height: '48px', paddingTop: '12px', paddingBottom: '12px', paddingLeft: '32px', paddingRight: '32px', borderRadius: '8px' }}
           >
             <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -57,6 +57,7 @@ export default function Hero() {
             alt="Waypel app screenshot 1"
             width={385}
             height={985}
+            style={{ width: '385px', height: 'auto' }}
             className="object-contain "
             priority
           />
@@ -65,6 +66,7 @@ export default function Hero() {
             alt="Waypel app screenshot 2"
             width={385}
             height={985}
+            style={{ width: '385px', height: 'auto' }}
             className="object-contain"
             priority
           />

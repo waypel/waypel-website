@@ -50,12 +50,12 @@ const learnersSteps = [
 
 function CreatorCard({ image, title, description }: { image: string; title: string; description: string }) {
   return (
-    <article className="flex flex-col gap-4">
-      <div className="w-full aspect-[3/4] bg-gray-900 rounded-2xl overflow-hidden shadow-lg relative">
-        <Image src={image} alt={title} fill className="object-cover" />
+    <article className="flex flex-col rounded-2xl overflow-hidden bg-gray-50">
+      <div className="w-full aspect-[3/4] bg-gray-900 relative">
+        <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
       </div>
-      <div>
-        <h3 className="font-semibold text-gray-900 mb-1">{title}</h3>
+      <div className="p-6 flex flex-col gap-3">
+        <h3 className="font-semibold text-gray-900">{title}</h3>
         <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
       </div>
     </article>
@@ -66,7 +66,7 @@ function LearnerCard({ image, title, description }: { image: string; title: stri
   return (
     <article className="flex flex-col rounded-2xl overflow-hidden" style={{ backgroundColor: "#f0f7e6" }}>
       <div className="w-full aspect-[4/3] relative overflow-hidden">
-        <Image src={image} alt={title} fill className="object-cover object-top" />
+        <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-top" />
       </div>
       <div className="p-6 flex flex-col gap-3">
         <h3 className="font-bold text-gray-900 text-lg">{title}</h3>
@@ -116,7 +116,10 @@ export default function HowItWorks() {
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+        <div
+          className="grid grid-cols-1 md:grid-cols-3"
+          style={{ width: "1240px", minHeight: "621px", gap: "16px" }}
+        >
           {tab === "creators"
             ? creatorsSteps.map((step, i) => (
                 <CreatorCard key={i} image={step.image} title={step.title} description={step.description} />

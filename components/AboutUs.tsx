@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function AboutUs() {
   return (
     <section id="about" className="py-20 px-4 sm:px-6 bg-white">
@@ -26,15 +28,8 @@ export default function AboutUs() {
 
           {/* Image */}
           <div className="flex-1 w-full">
-            <div className="rounded-2xl overflow-hidden bg-gray-200 aspect-[4/3] flex items-center justify-center">
-              <div className="text-center text-gray-400">
-                <div className="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-3 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                <p className="text-sm">Student learning image</p>
-              </div>
+            <div className="rounded-2xl overflow-hidden aspect-[4/3] relative">
+              <Image src="/about-us.png" alt="Student learning" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
           </div>
         </div>
