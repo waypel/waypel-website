@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="pt-28 pb-16 px-4 sm:px-6 bg-white text-center">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight mb-5">
+    <section className=" ['Oxygen'] pt-60 pb-16 px-4 sm:px-6 bg-white text-center">
+      <div className="max-w-3xl mx-auto ">
+        <h1 className="text-4xl sm:text-8xl font-bold text-gray-900 leading-tight mb-5 ">
           The pathway to <br /> learn and earn
         </h1>
         <p className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">

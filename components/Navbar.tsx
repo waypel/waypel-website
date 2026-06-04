@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 const navLinks = [
@@ -20,10 +21,8 @@ export default function Navbar() {
       >
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 font-bold text-lg text-gray-900">
-          <span className="bg-[#2d5a27] text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold">
-            W
-          </span>
-          Waypel
+          <Image src="/logo.png" alt="Waypel logo" width={160.31} height={42.82} className="rounded-full" />
+         
         </a>
 
         {/* Desktop Links */}

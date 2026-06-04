@@ -5,6 +5,8 @@ const footerLinks = [
   { label: "Contact us", href: "#contact" },
 ];
 
+import Image from "next/image";
+
 const legalLinks = [
   { label: "Privacy Policy", href: "#" },
   { label: "Terms & Conditions", href: "#" },
@@ -17,10 +19,8 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 font-bold text-gray-900">
-            <span className="bg-[#2d5a27] text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold">
-              W
-            </span>
-            Waypel
+            <Image src="/logo.png" alt="Waypel logo" width={160.31} height={42.85} className="rounded-full" />
+    
           </a>
 
           {/* Links */}
@@ -76,7 +76,7 @@ export default function Footer() {
 
       {/* Large Watermark */}
       <div className="overflow-hidden" aria-hidden="true">
-        <p className="text-center font-black text-[18vw] leading-none text-gray-100 select-none tracking-tight">
+        <p className="font-bold text-center leading-[358.1px] tracking-[-11.19px] text-[358.1px]">
           Waypel
         </p>
       </div>

@@ -92,7 +92,7 @@ export default function HowItWorks() {
           className="flex flex-col items-center"
           style={{ width: "566px", minHeight: "167px", gap: "48px" }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 m-0">
+          <h2 className=" ['Oxygen'] text-3xl sm:text-6xl font-bold text-center text-gray-900 m-0">
             How Waypel works
           </h2>
 
