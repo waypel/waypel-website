@@ -11,10 +11,10 @@ export default function AboutUs() {
         <div className="flex flex-col md:flex-row items-center gap-10">
           {/* Text */}
           <div className="flex-1">
-            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-5 leading-snug">
+            <h3 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-5 leading-oxygen line-height-46px">
               We integrate fun into Education
             </h3>
-            <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
+            <p className="text-black leading-relaxed text-sm sm:text-base">
               Waypel is an innovative educational platform designed to make
               learning engaging, rewarding, and accessible for everyone. Users
               can explore educational videos, quizzes, and learning-based games
@@ -28,7 +28,7 @@ export default function AboutUs() {
 
           {/* Image */}
           <div className="flex-1 w-full">
-            <div className="rounded-2xl overflow-hidden aspect-[4/3] relative">
+            <div className="rounded-1xl overflow-hidden aspect-4/3 relative">
               <Image src="/about-us.png" alt="Student learning" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
           </div>

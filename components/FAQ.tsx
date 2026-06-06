@@ -5,7 +5,7 @@ import { useState } from "react";
 const faqs = [
   {
     q: "What is Waypel?",
-    a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.",
+    a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.", 
   },
   { q: "How do I create an account?", a: null },
   { q: "How are creators paid on Waypel?", a: null },
@@ -18,10 +18,10 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="py-20 px-4 sm:px-6 bg-[#1a2e1a] relative overflow-hidden">
+    <section className="py-20 px-4 sm:px-6 bg-[#1A1A1A] relative overflow-hidden">
       {/* Watermark */}
       <span
-        className="absolute right-0 top-1/2 -translate-y-1/2 text-[120px] sm:text-[180px] font-black text-[#243824] select-none pointer-events-none leading-none"
+        className=" rotate-270 deg  absolute right-[-180] top-1/2 -translate-y-1/2 sm:text-[258px] text-bold text-[#8BC34A33] select-none pointer-events-none leading-none"
         aria-hidden="true"
       >
         FAQ
@@ -42,7 +42,7 @@ export default function FAQ() {
               >
                 <span>{faq.q}</span>
                 <svg
-                  className={`w-4 h-4 text-gray-400 transition-transform flex-shrink-0 ml-4 ${open === i ? "rotate-45" : ""}`}
+                  className={`w-4 h-4 text-gray-400 transition-transform shrink-0 ml-4 ${open === i ? "rotate-45" : ""}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

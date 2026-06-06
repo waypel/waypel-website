@@ -16,12 +16,12 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
       <nav
-        className="w-full max-w-[1440px] mx-auto px-[100px] flex items-center justify-between h-[81px]"
+        className="w-full max-w-360 mx-auto px-25 flex items-center justify-between h-20.25"
         aria-label="Main navigation"
       >
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 font-bold text-lg text-gray-900">
-          <Image src="/logo.png" alt="Waypel logo" width={160.31} height={42.82} className="rounded-full" />
+          <Image src="/logo.png" alt="Waypel logo" width={160.31} height={42.85} className="rounded-full" />
          
         </a>
 
@@ -31,7 +31,7 @@ export default function Navbar() {
             <li key={link.label}>
               <a
                 href={link.href}
-                className="hover:text-gray-900 transition-colors"
+                className="hover:text-[#8BC34A] transition-colors background-gray-100 text-gray-600 hover:bg-red-"
               >
                 {link.label}
               </a>
@@ -42,7 +42,7 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center px-4 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors"
+          className="hidden md:inline-flex items-center px-4 py-2 rounded-full border border-[#8BC34A] text-sm font-medium text-gray-800 hover:bg-[#8BC34A] transition-colors"
         >
           Contact us
         </a>

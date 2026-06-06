@@ -33,7 +33,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 px-4 sm:px-6 bg-[#1a2e1a]">
+    <section id="features" className="py-20 px-4 sm:px-6 bg-[#1C270F]">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-12">
           Features
@@ -43,7 +43,7 @@ export default function Features() {
           {features.map((feature) => (
             <article
               key={feature.title}
-              className="bg-[#243824] rounded-2xl p-6 flex flex-col gap-3 hover:bg-[#2d4a2d] transition-colors"
+              className="bg-[#2A3A16] rounded-2xl p-6 flex flex-col gap-3 hover:bg-[#2d4a2d] transition-colors"
             >
               <div className="w-10 h-10 bg-[#2d5a27] rounded-full flex items-center justify-center text-lg" aria-hidden="true">
                 {feature.icon}

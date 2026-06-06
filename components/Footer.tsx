@@ -43,7 +43,7 @@ export default function Footer() {
                 key={social}
                 href="#"
                 aria-label={social}
-                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-black-500 hover:bg-gray-200 transition-colors"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   {social === "Twitter" && (
@@ -62,7 +62,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-100 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
+        <div className="border-t border-gray-100 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-black-400">
           <span>© Copyright 2024. All Rights Reserved</span>
           <div className="flex gap-4">
             {legalLinks.map((link) => (

@@ -50,13 +50,13 @@ const learnersSteps = [
 
 function CreatorCard({ image, title, description }: { image: string; title: string; description: string }) {
   return (
-    <article className="flex flex-col rounded-2xl overflow-hidden bg-gray-50">
-      <div className="w-full aspect-[3/4] bg-gray-900 relative">
-        <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
+    <article className="flex flex-col rounded-2xl overflow-hidden" style={{ backgroundColor: "#f0f7e6" }}>
+      <div className="w-full aspect-4/3 relative overflow-hidden">
+        <Image src={image} alt={title} fill sizes="(max-width: 200px) 100vw, 33vw"  />
       </div>
       <div className="p-6 flex flex-col gap-3">
-        <h3 className="font-semibold text-gray-900">{title}</h3>
-        <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+        <h3 className="font-bold text-gray-900 text-lg">{title}</h3>
+        <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
       </div>
     </article>
   );
@@ -65,7 +65,7 @@ function CreatorCard({ image, title, description }: { image: string; title: stri
 function LearnerCard({ image, title, description }: { image: string; title: string; description: string }) {
   return (
     <article className="flex flex-col rounded-2xl overflow-hidden" style={{ backgroundColor: "#f0f7e6" }}>
-      <div className="w-full aspect-[4/3] relative overflow-hidden">
+      <div className="w-full aspect-4/3 relative overflow-hidden">
         <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-top" />
       </div>
       <div className="p-6 flex flex-col gap-3">
@@ -83,7 +83,7 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       className="bg-white w-full"
-      style={{ maxWidth: "1440px", margin: "0 auto", minHeight: "1078px", padding: "100px" }}
+      style={{ maxWidth: "14px", margin: "0 auto", minHeight: "100px", padding: "100px" }}
     >
       <div className="flex flex-col items-center" style={{ gap: "90px" }}>
 
@@ -92,7 +92,7 @@ export default function HowItWorks() {
           className="flex flex-col items-center"
           style={{ width: "566px", minHeight: "167px", gap: "48px" }}
         >
-          <h2 className=" ['Oxygen'] text-3xl sm:text-6xl font-bold text-center text-gray-900 m-0">
+          <h2 className=" ['Oxygen'] text-3xl sm:text-6xl font-bold text-center text-black m-0">
             How Waypel works
           </h2>
 
@@ -118,7 +118,7 @@ export default function HowItWorks() {
         {/* Steps Grid */}
         <div
           className="grid grid-cols-1 md:grid-cols-3"
-          style={{ width: "1240px", minHeight: "621px", gap: "16px" }}
+          style={{ width: "1240px", minHeight: "618px", gap: "16px" }}
         >
           {tab === "creators"
             ? creatorsSteps.map((step, i) => (
