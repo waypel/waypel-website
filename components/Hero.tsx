@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className=" ['Oxygen'] pt-60 pb-16 px-4 sm:px-6 bg-white text-center">
+    <section className=" ['Oxygen'] pt-50 pb-16 px-4 sm:px-6 bg-white text-center">
       <div className="max-w-3xl mx-auto ">
         <h1 className="text-4xl sm:text-8xl font-bold text-black leading-tight mb-5 weight-700">
           The pathway to <br /> learn and earn
@@ -38,17 +38,23 @@ export default function Hero() {
         </div>
 
         {/* Trust Badge */}
-        <div className="flex items-center justify-center gap-2 text-sm text-gray-500 mb-12">
-          <div className="flex -space-x-2">
-            {["bg-orange-400", "bg-blue-400", "bg-green-400"].map((color, i) => (
-              <span
-                key={i}
-                className={`w-7 h-7 rounded-full ${color} border-2 border-white`}
-              />
-            ))}
-          </div>
-          <span>Trusted by 500+ users</span>
-        </div>
+      
+
+<div className="flex items-center justify-center gap-2  text-gray-500 mb-12">
+  <div className="flex -space-x-3">
+    {["/badge1.png", "/badge2.png", "/badge3.png"].map((src, i) => (
+      <Image
+        key={i}
+        src={src}
+        alt={`Badge ${i + 1}`}
+        width={40}
+        height={40}
+        className="rounded-full border-2 border-white"
+      />
+    ))}
+  </div>
+  <span className="text-base sm:text-lg font-semibold text-gray-700">Trusted by 500+ users</span>
+</div>
 
         {/* Phone Mockups */}
         <div className="flex items-end justify-center gap-4 mt-4">

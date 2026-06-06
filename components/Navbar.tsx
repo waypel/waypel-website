@@ -20,18 +20,18 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 font-bold text-lg text-gray-900">
-          <Image src="/logo.png" alt="Waypel logo" width={160.31} height={42.85} className="rounded-full" />
+        <a href="#" className="flex items-center  text-gray-900">
+          <Image src="/Logo (1).png" alt="Waypel logo" width={160.31} height={42.85} className="rounded-full" />
          
         </a>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex items-center text-sm font-medium text-gray-600" style={{ width: '408.48px', height: '24px', gap: '47.83px' }}>
+        <ul className="flex flex-wrapitems-center text-sm  " style={{ width: '408.48px', height: '24px', gap: '47.83px' }}>
           {navLinks.map((link) => (
             <li key={link.label}>
               <a
                 href={link.href}
-                className="hover:text-[#8BC34A] transition-colors background-gray-100 text-gray-600 hover:bg-red-"
+                className="hover:text-[#8BC34A] transition-colors  text-black "
               >
                 {link.label}
               </a>

@@ -25,10 +25,10 @@ export default function Footer() {
 
           {/* Links */}
           <nav aria-label="Footer navigation">
-            <ul className="flex flex-wrap gap-5 text-sm text-gray-600">
+            <ul className="flex flex-wrap gap-5 text-sm text-black-">
               {footerLinks.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="hover:text-gray-900 transition-colors">
+                  <a href={link.href} className="hover:text-[#8BC34A] transition-colors">
                     {link.label}
                   </a>
                 </li>
