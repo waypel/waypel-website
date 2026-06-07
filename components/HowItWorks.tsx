@@ -7,7 +7,7 @@ const creatorsSteps = [
   {
     title: "Download & Create an Account",
     description:
-      "Download Waypel from Play Store or iOS, then use your creator account to begin immediately.",
+      "Download Waypel from Play Store or App Store, then create your creator account to begin immediately.",
     screen: "Create Account",
     image: "/create-account-01.png",
   },
@@ -53,8 +53,8 @@ function CreatorCard({ image, title, description, overlay = false }: { image: st
     return (
       <article className="flex flex-col justify-between rounded-2xl h-full overflow-hidden" style={{ backgroundColor: "#f0f7e6" }}>
         <div className="p-6 flex flex-col gap-3 text-center">
-          <h3 className="text-gray-900" style={{ width: "354.67px", height: "32px", fontSize: "24px", fontWeight: 700, fontFamily: "Oxygen", lineHeight: "32px", letterSpacing: "0%", opacity: 1 }}>{title}</h3>
-          <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
+          <h3 className="text-gray-900 text-left" style={{ width: "354.67px", height: "42px", fontSize: "24px", fontWeight: 700,  font: "Oxygen", lineHeight: "32px", letterSpacing: "0%", opacity: 1 }}>{title}</h3>
+          <p className="text-left text-sm text-[#00080A] leading-relaxed">{description}</p>
         </div>
         <div className="w-full h-91.75 relative">
           <Image src={image} alt={title} fill sizes="(max-width: 200px) 100vw, 33vw" className="object-contain" />
@@ -69,8 +69,8 @@ function CreatorCard({ image, title, description, overlay = false }: { image: st
         <Image src={image} alt={title} fill sizes="(max-width: 200px) 100vw, 33vw"  />
       </div>
       <div className="p-6 flex flex-col gap-3 text-center">
-        <h3 className="text-gray-900" style={{ width: "354.67px", height: "32px", fontSize: "24px", fontWeight: 700, fontFamily: "Oxygen", lineHeight: "32px", letterSpacing: "0%", opacity: 1 }}>{title}</h3>
-        <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
+        <h3 className="text-gray-900" style={{ width: "354.67px", height: "32px", fontSize: "24px", fontWeight: 700, font: "Oxygen", lineHeight: "32px", letterSpacing: "0%", opacity: 1 }}>{title}</h3>
+        <p className="text-left text-sm text-gray-600 leading-relaxed">{description}</p>
       </div>
     </article>
   );
@@ -82,7 +82,7 @@ function LearnerCard({ image, title, description, overlay = false }: { image: st
       <article className="flex flex-col justify-between rounded-2xl h-full" style={{ backgroundColor: "#f0f7e6" }}>
         <div className="p-6 flex flex-col gap-3 text-center">
           <h3 className="text-gray-900" style={{ width: "354.67px", height: "32px", fontSize: "24px", fontWeight: 700, fontFamily: "Oxygen", lineHeight: "32px", letterSpacing: "0%", opacity: 1 }}>{title}</h3>
-          <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
+        <p className="text-left text-sm text-gray-600 leading-relaxed">{description}</p>
         </div>
         <div className="w-4/5 h-91.75 relative mx-auto">
           <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain object-top" />
@@ -98,7 +98,7 @@ function LearnerCard({ image, title, description, overlay = false }: { image: st
       </div>
       <div className="p-6 flex flex-col gap-3 text-center">
         <h3 className="text-gray-900" style={{ width: "354.67px", height: "32px", fontSize: "24px", fontWeight: 700, fontFamily: "Oxygen", lineHeight: "32px", letterSpacing: "0%", opacity: 1 }}>{title}</h3>
-        <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
+        <p className="text-left text-sm text-gray-600 leading-relaxed">{description}</p>
       </div>
     </article>
   );

@@ -2,16 +2,20 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "About us", href: "#about" },
-  { label: "Features", href: "#features" },
+  { label: "Home", href: "/" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "About us", href: "/#about" },
+  { label: "Features", href: "/#features" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isContactPage = !!pathname && (pathname === "/contact" || pathname.startsWith("/contact/"));
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
@@ -20,19 +24,16 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         {/* Logo */}
-        <a href="#" className="flex items-center  text-gray-900">
+        <Link href="/" className="flex items-center  text-gray-900">
           <Image src="/Logo (1).png" alt="Waypel logo" width={160.31} height={42.85} className="rounded-full" />
          
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <ul className="flex flex-wrapitems-center text-sm  " style={{ width: '408.48px', height: '24px', gap: '47.83px' }}>
           {navLinks.map((link) => (
             <li key={link.label}>
-              <a
-                href={link.href}
-                className="hover:text-[#8BC34A] transition-colors  text-black "
-              >
+              <a href={link.href} className="hover:text-[#8BC34A] transition-colors  text-black ">
                 {link.label}
               </a>
             </li>
@@ -40,12 +41,16 @@ export default function Navbar() {
         </ul>
 
         {/* CTA */}
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center px-4 py-2 rounded-full border border-[#8BC34A] text-sm font-medium text-gray-800 hover:bg-[#8BC34A] transition-colors"
-        >
-          Contact us
-        </a>
+        {isContactPage ? (
+          <div className="hidden md:inline-flex items-center px-4 py-2 rounded-full border border-transparent text-sm font-medium text-transparent" />
+        ) : (
+          <Link
+            href="/contact"
+            className="hidden md:inline-flex items-center px-4 py-2 rounded-full border border-[#8BC34A] text-sm font-medium text-gray-800 hover:bg-[#8BC34A] transition-colors "
+          >
+            Contact Us
+          </Link>
+        )}
 
         {/* Mobile burger */}
         <button
@@ -77,12 +82,15 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="mt-2 text-center px-4 py-2 rounded-full border border-gray-300 text-sm font-medium text-gray-800"
-          >
-            Contact us
-          </a>
+          {!isContactPage && (
+            <Link
+              href="/contact"
+              className="mt-2 text-center px-4 py-2 rounded-full border border-[#8BC34A] text-sm font-medium text-gray-800 hover:bg-[#8BC34A] transition-colors"
+              onClick={() => setOpen(false)}
+            >
+              Contact us
+            </Link>
+          )}
         </div>
       )}
     </header>
