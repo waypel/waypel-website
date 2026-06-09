@@ -1,3 +1,5 @@
+"use client";
+
 const footerLinks = [
   { label: "About us", href: "#about" },
   { label: "Features", href: "#features" },
@@ -6,6 +8,8 @@ const footerLinks = [
 ];
 
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 
 const legalLinks = [
   { label: "Privacy Policy", href: "#" },
@@ -13,6 +17,25 @@ const legalLinks = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  function handleContactClick(e) {
+    e.preventDefault();
+    if (pathname === "/") {
+      const el = document.getElementById("contact");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+    }
+    if (typeof window !== "undefined") {
+      window.location.href = "/#contact";
+    } else {
+      router.push("/#contact");
+    }
+  }
+
   return (
     <footer className="bg-white border-t border-gray-100 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
@@ -28,9 +51,15 @@ export default function Footer() {
             <ul className="flex flex-wrap gap-8 text-sm text-black-">
               {footerLinks.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="hover:text-[#8BC34A] transition-colors">
-                    {link.label}
-                  </a>
+                  {link.label === "Contact us" ? (
+                    <a href="/#contact us" onClick={handleContactClick} className="hover:text-[#8BC34A] transition-colors">
+                      {link.label}
+                    </a>
+                  ) : (
+                    <a href={link.href} className="hover:text-[#8BC34A] transition-colors">
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
