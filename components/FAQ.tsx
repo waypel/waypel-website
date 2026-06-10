@@ -3,15 +3,18 @@
 import { useState } from "react";
 
 const faqs = [
-  {
-    q: "What is Waypel?",
-    a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.", 
+   { q: "How do I create an account?", a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.", 
+   },
+  { q: "How do I create an account?", a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.", 
+   },
+  { q: "How are creators paid on Waypel?",  a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.", 
   },
-  { q: "How do I create an account?", a: null },
-  { q: "How are creators paid on Waypel?", a: null },
-  { q: "What type of content is available on Waypel?", a: null },
-  { q: "Can learners earn rewards on Waypel?", a: null },
-  { q: "Why is there a creator knowledge test?", a: null },
+  { q: "What type of content is available on Waypel?", a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.", 
+  },
+  { q: "Can learners earn rewards on Waypel?", a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.", 
+  },
+  { q: "Why is there a creator knowledge test?", a: "Waypel is an interactive educational platform that combines learning, quizzes, games, and digital experiences to make education engaging and rewarding.", 
+  },
 ];
 
 export default function FAQ() {

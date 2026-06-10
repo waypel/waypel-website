@@ -6,9 +6,9 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="bg-white py-24 px-6 md:px-10 lg:px-20 min-h-screen relative"
+      className="bg-white py-24 px-6 md:px-10 lg:px-20 min-h-300 relative "
     >
-      <div className="mx-auto w-full max-w-3xl lg:w-[420px] lg:h-[855px] lg:absolute lg:top-[140px] lg:left-[498px] lg:mx-0">
+      <div className="mx-auto w-full max-w-3xl lg:w-105 lg:h-213.75 lg:absolute lg:top-35 lg:left-124.5 lg:mx-0">
         {/* Heading */}
         <div className="text-center mb-8">
           <h2 className="text-5xl md:text-5xl font-bold text-black mb-6">
