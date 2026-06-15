@@ -4,38 +4,18 @@ const footerLinks = [
   { label: "About us", href: "#about" },
   { label: "Features", href: "#features" },
   { label: "How it Works", href: "#how-it-works" },
-  { label: "Contact us", href: "#contact" },
+  { label: "Contact us", href: "/contact" },
 ];
 
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 const legalLinks = [
-  { label: "Privacy Policy", href: "#" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms & Conditions", href: "#" },
 ];
 
 export default function Footer() {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  function handleContactClick(e: any) {
-    e.preventDefault();
-    if (pathname === "/") {
-      const el = document.getElementById("contact");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
-      }
-    }
-    if (typeof window !== "undefined") {
-      window.location.href = "/#contact";
-    } else {
-      router.push("/#contact");
-    }
-  }
-
   return (
     <footer className="bg-white border-t border-gray-100 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
@@ -51,15 +31,9 @@ export default function Footer() {
             <ul className="flex flex-wrap gap-8 text-sm text-black-">
               {footerLinks.map((link) => (
                 <li key={link.label}>
-                  {link.label === "Contact us" ? (
-                    <a href="/#contact us" onClick={handleContactClick} className="hover:text-[#8BC34A] transition-colors">
-                      {link.label}
-                    </a>
-                  ) : (
-                    <a href={link.href} className="hover:text-[#8BC34A] transition-colors">
-                      {link.label}
-                    </a>
-                  )}
+                  <Link href={link.href} className="hover:text-[#8BC34A] transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -95,7 +69,7 @@ export default function Footer() {
           <span>© Copyright 2024. All Rights Reserved</span>
           <div className="flex gap-4">
             {legalLinks.map((link) => (
-              <a key={link.label} href={link.href} className="hover:text-gray-600 transition-colors">
+              <a key={link.label} href={link.href} className="hover:text-[#8BC34A] transition-colors">
                 {link.label}
               </a>
             ))}

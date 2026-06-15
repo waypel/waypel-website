@@ -16,7 +16,7 @@ export default function Hero() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 mb-6">
           <a
-            href="#"
+            href="https://play.google.com/store/apps/details?id=com.anonymous.wapelmobile"
             className="flex items-center gap-2.5 text-black text-sm font-medium rounded-lg hover:opacity-90 transition-opacity"
             style={{ background: '#8BC34A', width: '260px', height: '48px', paddingTop: '12px', paddingBottom: '12px', paddingLeft: '32px', paddingRight: '32px', borderRadius: '8px', fontWeight: '600' }}
           >
@@ -26,7 +26,7 @@ export default function Hero() {
             Download for Android
           </a>
           <a
-            href="#"
+            href="https://apps.apple.com/es/app/waypel/id6755714975"
             className="flex items-center gap-2.5 text-black text-sm font-medium hover:opacity-90 transition-opacity"
             style={{ background: '#8BC34A', width: '240px', height: '48px', paddingTop: '12px', paddingBottom: '12px', paddingLeft: '32px', paddingRight: '32px', borderRadius: '8px', fontWeight: '600' }}
           >

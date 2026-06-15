@@ -96,7 +96,7 @@ export default function Navbar() {
               {!isContactPage && (
                 <Link
                   href="/contact"
-                  className="mt-2 text-center px-4 py-2 rounded-full border border-[#8BC34A] text-sm font-medium text-gray-800 hover:bg-[#8BC34A] hover:text-white transition-colors"
+                  className="mt-2 text-center px-4 py-2 rounded-full border hover:text-[#8BC34A] border-[#8BC34A] text-sm font-medium text-gray-800 hover:bg-[#8BC34A] transition-colors"
                   onClick={() => setOpen(false)}
                 >
                   Contact us
