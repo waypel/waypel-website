@@ -20,7 +20,7 @@ export default function Footer() {
   const pathname = usePathname();
   const router = useRouter();
 
-  function handleContactClick(e) {
+  function handleContactClick(e: any) {
     e.preventDefault();
     if (pathname === "/") {
       const el = document.getElementById("contact");
