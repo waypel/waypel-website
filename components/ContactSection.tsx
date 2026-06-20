@@ -1,16 +1,46 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
+
+const API_URL = "https://waypelserverside.com";
 
 export default function ContactSection() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => setFormSubmitted(false), 5000);
+    setLoading(true);
+    setError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch(`${API_URL}/admin/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          message: formData.get("message"),
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to send message");
+
+      setFormSubmitted(true);
+      form.reset();
+      setTimeout(() => setFormSubmitted(false), 5000);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -102,11 +132,16 @@ export default function ContactSection() {
                   <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">We usually respond within 24 business hours.</p>
                 </div>
 
+                {error && (
+                  <p className="text-red-500 text-sm font-medium">{error}</p>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-2">
                     <label htmlFor="name" className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Name</label>
                     <input
                       id="name"
+                      name="name"
                       type="text"
                       required
                       placeholder="Your Name"
@@ -117,6 +152,7 @@ export default function ContactSection() {
                     <label htmlFor="email" className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email</label>
                     <input
                       id="email"
+                      name="email"
                       type="email"
                       required
                       placeholder="Your Email"
@@ -129,6 +165,7 @@ export default function ContactSection() {
                   <label htmlFor="phone" className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Phone Number</label>
                   <input
                     id="phone"
+                    name="phone"
                     type="tel"
                     placeholder="+1 (555) 000-0000"
                     className="w-full h-12 px-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#111a08] text-gray-900 dark:text-white placeholder:text-gray-400 outline-none transition-all duration-300 focus:border-[#8BC34A] focus:bg-white dark:focus:bg-[#1c2a0f] focus:ring-4 focus:ring-[#8BC34A]/10 text-sm font-semibold"
@@ -139,6 +176,7 @@ export default function ContactSection() {
                   <label htmlFor="message" className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Your Message</label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={4}
                     required
                     placeholder="Tell us what we can help you with..."
@@ -148,12 +186,13 @@ export default function ContactSection() {
 
                 <motion.button
                   type="submit"
+                  disabled={loading}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full h-12 rounded-xl bg-[#8BC34A] text-black font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#8BC34A]/25 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full h-12 rounded-xl bg-[#8BC34A] text-black font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#8BC34A]/25 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <Send size={16} />
-                  Send Message
+                  {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+                  {loading ? "Sending..." : "Send Message"}
                 </motion.button>
               </form>
             )}
