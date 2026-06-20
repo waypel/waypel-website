@@ -18,18 +18,15 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-100 overflow-hidden relative">
+    <footer className="bg-white dark:bg-[#0c1206] border-t border-gray-100 dark:border-gray-800 overflow-hidden relative transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-gray-900 transition-transform duration-300 hover:scale-102">
+          <Link href="/" className="flex items-center gap-2 font-bold transition-transform duration-300 hover:scale-102">
             <Image src="/logo.png" alt="Waypel logo" width={140} height={37.4} className="rounded-full" />
           </Link>
 
-          {/* Links */}
           <nav aria-label="Footer navigation">
-            <ul className="flex flex-wrap gap-8 text-sm font-semibold text-gray-600">
+            <ul className="flex flex-wrap gap-8 text-sm font-semibold text-gray-600 dark:text-gray-400">
               {footerLinks.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="hover:text-[#8BC34A] transition-colors duration-200">
@@ -40,7 +37,6 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Social Icons */}
           <div className="flex items-center gap-3" aria-label="Social media links">
             {["Twitter", "Facebook", "Instagram"].map((social) => (
               <motion.a
@@ -49,7 +45,7 @@ export default function Footer() {
                 aria-label={social}
                 whileHover={{ scale: 1.12, backgroundColor: "rgba(139, 195, 74, 0.15)", color: "#8BC34A" }}
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500 transition-all duration-300"
+                className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 transition-all duration-300"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   {social === "Twitter" && (
@@ -67,8 +63,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-100 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-gray-400">
+        <div className="border-t border-gray-100 dark:border-gray-800 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-gray-400">
           <span>© Copyright 2024. All Rights Reserved</span>
           <div className="flex gap-6">
             {legalLinks.map((link) => (
@@ -80,13 +75,11 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Large Watermark - Styled subtle */}
       <div className="overflow-hidden select-none pointer-events-none opacity-[0.03] absolute bottom-[-40px] left-0 right-0 z-0" aria-hidden="true">
-        <p className="font-black text-center leading-none tracking-tighter text-[220px] sm:text-[320px] text-gray-900">
+        <p className="font-black text-center leading-none tracking-tighter text-[220px] sm:text-[320px] text-gray-900 dark:text-white">
           Waypel
         </p>
       </div>
     </footer>
   );
 }
-

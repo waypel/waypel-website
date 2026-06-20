@@ -29,14 +29,14 @@ const itemVariants: Variants = {
 
 export default function Hero() {
   return (
-    <section className="relative pt-36 pb-20 px-4 sm:px-6 bg-white overflow-hidden text-center">
+    <section className="relative pt-36 pb-20 px-4 sm:px-6 bg-white dark:bg-[#0c1206] overflow-hidden text-center transition-colors duration-300">
       {/* Ambient background glows */}
       <div 
         className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gradient-to-tr from-[#8BC34A]/10 to-emerald-200/10 rounded-full blur-3xl -z-10" 
         style={{ pointerEvents: 'none' }}
       />
       <div 
-        className="absolute top-80 left-[10%] w-[300px] h-[300px] bg-lime-100/20 rounded-full blur-3xl -z-10 animate-pulse" 
+        className="absolute top-80 left-[10%] w-[300px] h-[300px] bg-lime-100/20 dark:bg-lime-900/10 rounded-full blur-3xl -z-10 animate-pulse" 
         style={{ pointerEvents: 'none', animationDuration: '8s' }}
       />
       <div 
@@ -50,19 +50,17 @@ export default function Hero() {
         animate="visible"
         className="max-w-4xl mx-auto relative z-10"
       >
-        {/* Animated Heading */}
         <motion.h1 
           variants={itemVariants}
-          className="text-4xl sm:text-7xl lg:text-8xl font-black text-black leading-none mb-6 tracking-tight"
+          className="text-4xl sm:text-7xl lg:text-8xl font-black text-black dark:text-white leading-none mb-6 tracking-tight"
         >
           The pathway to <br />
           <span className="text-[#8BC34A] bg-clip-text">learn and earn</span>
         </motion.h1>
 
-        {/* Animated Subtitle */}
         <motion.p 
           variants={itemVariants}
-          className="text-gray-500 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
+          className="text-gray-500 dark:text-gray-400 text-base sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
         >
           Waypel combines quizzes, short videos, and rewards into one engaging
           experience where users learn new things, compete with friends, and
@@ -102,7 +100,7 @@ export default function Hero() {
         {/* Trust Badge */}
         <motion.div 
           variants={itemVariants}
-          className="flex items-center justify-center gap-3 text-gray-500 mb-16"
+          className="flex items-center justify-center gap-3 text-gray-500 dark:text-gray-400 mb-16"
         >
           <div className="flex -space-x-3.5">
             {["/badge1.png", "/badge2.png", "/badge3.png"].map((src, i) => (
@@ -116,12 +114,12 @@ export default function Hero() {
                   alt={`Badge ${i + 1}`}
                   width={42}
                   height={42}
-                  className="rounded-full border-2 border-white shadow-xs"
+                  className="rounded-full border-2 border-white dark:border-gray-800 shadow-xs"
                 />
               </motion.div>
             ))}
           </div>
-          <span className="text-sm sm:text-base font-semibold text-gray-700">Trusted by 500+ users</span>
+          <span className="text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300">Trusted by 500+ users</span>
         </motion.div>
 
         {/* Floating Phone Mockups */}
@@ -129,16 +127,9 @@ export default function Hero() {
           variants={itemVariants}
           className="flex items-end justify-center gap-6 mt-8 max-w-4xl mx-auto px-4"
         >
-          {/* Phone 1 */}
           <motion.div
-            animate={{
-              y: [0, -12, 0],
-            }}
-            transition={{
-              duration: 5.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
             className="w-1/2 max-w-[280px]"
           >
             <Image
@@ -152,17 +143,9 @@ export default function Hero() {
             />
           </motion.div>
 
-          {/* Phone 2 */}
           <motion.div
-            animate={{
-              y: [0, -16, 0],
-            }}
-            transition={{
-              duration: 6.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.4,
-            }}
+            animate={{ y: [0, -16, 0] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
             className="w-1/2 max-w-[280px]"
           >
             <Image
@@ -180,4 +163,3 @@ export default function Hero() {
     </section>
   );
 }
-
