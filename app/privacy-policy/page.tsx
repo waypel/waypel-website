@@ -6,26 +6,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp, Mail, MapPin } from 'lucide-react';
 import { Variants } from "framer-motion";
 
-/**
- * Privacy Policy Page Component
- * A modern, responsive SaaS-style privacy policy with:
- * - Smooth animations and transitions
- * - Sticky Table of Contents on desktop
- * - Semantic HTML and accessibility features
- * - Tailwind CSS styling with green accent (#8BC34A)
- * - Back-to-Top button and smooth scrolling
- */
-
 export default function PrivacyPage() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
-  // Handle scroll events for back-to-top button and active section tracking
   useEffect(() => {
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 300);
 
-      // Track active section for table of contents highlighting
       const sections = document.querySelectorAll('section[id]');
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
@@ -39,12 +27,10 @@ export default function PrivacyPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth scroll to top
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Smooth scroll to section
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -52,7 +38,6 @@ export default function PrivacyPage() {
     }
   };
 
-  // Animation variants for sections
   const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
@@ -79,7 +64,6 @@ export default function PrivacyPage() {
     }),
   };
 
-  // Table of contents sections
   const tocSections = [
     { id: 'information-collected', label: 'Information We Collect' },
     { id: 'how-we-use', label: 'How We Use Your Information' },
@@ -90,15 +74,14 @@ export default function PrivacyPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50">
-      {/* ============ HERO SECTION ============ */}
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50 dark:from-[#0c1206] dark:via-[#0c1206] dark:to-[#111a08] transition-colors duration-300">
+      {/* HERO SECTION */}
       <motion.section
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="relative overflow-hidden bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 px-4 py-20 sm:px-6 lg:px-8"
       >
-        {/* Decorative elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-[#8BC34A]/10 blur-3xl"></div>
           <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-[#8BC34A]/10 blur-3xl"></div>
@@ -137,16 +120,16 @@ export default function PrivacyPage() {
       </motion.section>
 
       <div className="flex flex-col lg:flex-row">
-        {/* ============ STICKY TABLE OF CONTENTS ============ */}
+        {/* STICKY TABLE OF CONTENTS */}
         <aside className="sticky top-20 hidden h-fit w-64 shrink-0 lg:block">
           <motion.nav
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="m-8 rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+            className="m-8 rounded-lg border border-slate-200 dark:border-gray-800 bg-white dark:bg-[#1c2a0f] p-6 shadow-sm"
             aria-label="Table of contents"
           >
-            <h2 className="mb-6 text-sm font-bold uppercase tracking-widest text-slate-900">
+            <h2 className="mb-6 text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white">
               Contents
             </h2>
             <ul className="space-y-3">
@@ -157,7 +140,7 @@ export default function PrivacyPage() {
                     className={`text-sm transition-colors duration-200 ${
                       activeSection === section.id
                         ? 'font-semibold text-[#8BC34A]'
-                        : 'text-slate-600 hover:text-[#8BC34A]'
+                        : 'text-slate-600 dark:text-gray-400 hover:text-[#8BC34A]'
                     }`}
                     aria-current={activeSection === section.id ? 'page' : undefined}
                   >
@@ -169,15 +152,15 @@ export default function PrivacyPage() {
           </motion.nav>
         </aside>
 
-        {/* ============ MOBILE TABLE OF CONTENTS ============ */}
+        {/* MOBILE TABLE OF CONTENTS */}
         <motion.nav
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="lg:hidden mx-4 mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:mx-6 sm:p-6"
+          className="lg:hidden mx-4 mb-6 rounded-2xl border border-slate-200 dark:border-gray-800 bg-white dark:bg-[#1c2a0f] p-5 shadow-sm sm:mx-6 sm:p-6"
           aria-label="Mobile table of contents"
         >
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-900">
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white">
             Contents
           </h2>
           <ul className="grid gap-3 sm:grid-cols-2">
@@ -187,8 +170,8 @@ export default function PrivacyPage() {
                   onClick={() => scrollToSection(section.id)}
                   className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition-all duration-200 ${
                     activeSection === section.id
-                      ? 'border-[#8BC34A] bg-[#8BC34A]/10 font-semibold text-[#0f5132]'
-                      : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-[#8BC34A] hover:text-[#0f5132]'
+                      ? 'border-[#8BC34A] bg-[#8BC34A]/10 font-semibold text-[#8BC34A]'
+                      : 'border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-[#111a08] text-slate-700 dark:text-gray-300 hover:border-[#8BC34A]'
                   }`}
                   aria-current={activeSection === section.id ? 'page' : undefined}
                 >
@@ -199,10 +182,10 @@ export default function PrivacyPage() {
           </ul>
         </motion.nav>
 
-        {/* ============ MAIN CONTENT ============ */}
+        {/* MAIN CONTENT */}
         <main className="flex-1 px-4 py-8 sm:px-6 lg:px-8">
           <motion.div className="mx-auto max-w-3xl space-y-12">
-            {/* ============ SECTION 1: INFORMATION WE COLLECT ============ */}
+            {/* SECTION 1: INFORMATION WE COLLECT */}
             <motion.section
               id="information-collected"
               custom={0}
@@ -214,25 +197,24 @@ export default function PrivacyPage() {
             >
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900">Information We Collect</h2>
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Information We Collect</h2>
                   <div className="mt-3 h-1 w-16 bg-linear-to-r from-[#8BC34A] to-transparent"></div>
                 </div>
 
-                <p className="text-lg leading-relaxed text-slate-700">
+                <p className="text-lg leading-relaxed text-slate-700 dark:text-gray-300">
                   We collect information you provide directly to us, such as when you create an account,
                   use our services, or contact us for support.
                 </p>
 
-                {/* Personal Information Card */}
                 <motion.div
                   custom={0}
                   variants={cardVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
+                  className="rounded-lg border border-slate-200 dark:border-gray-800 bg-white dark:bg-[#1c2a0f] p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
                 >
-                  <h3 className="mb-4 flex items-center text-xl font-semibold text-slate-900">
+                  <h3 className="mb-4 flex items-center text-xl font-semibold text-slate-900 dark:text-white">
                     <span className="mr-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#8BC34A]/20">
                       <span className="text-sm font-bold text-[#8BC34A]">1</span>
                     </span>
@@ -252,7 +234,7 @@ export default function PrivacyPage() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="flex items-start text-slate-700"
+                        className="flex items-start text-slate-700 dark:text-gray-300"
                       >
                         <span className="mr-3 mt-1.5 shrink-0 text-[#8BC34A]">•</span>
                         <span>{item}</span>
@@ -261,16 +243,15 @@ export default function PrivacyPage() {
                   </ul>
                 </motion.div>
 
-                {/* Automatically Collected Information Card */}
                 <motion.div
                   custom={1}
                   variants={cardVariants}
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
+                  className="rounded-lg border border-slate-200 dark:border-gray-800 bg-white dark:bg-[#1c2a0f] p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
                 >
-                  <h3 className="mb-4 flex items-center text-xl font-semibold text-slate-900">
+                  <h3 className="mb-4 flex items-center text-xl font-semibold text-slate-900 dark:text-white">
                     <span className="mr-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#8BC34A]/20">
                       <span className="text-sm font-bold text-[#8BC34A]">2</span>
                     </span>
@@ -290,7 +271,7 @@ export default function PrivacyPage() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="flex items-start text-slate-700"
+                        className="flex items-start text-slate-700 dark:text-gray-300"
                       >
                         <span className="mr-3 mt-1.5 shrink-0 text-[#8BC34A]">•</span>
                         <span>{item}</span>
@@ -301,10 +282,9 @@ export default function PrivacyPage() {
               </div>
             </motion.section>
 
-            {/* Divider */}
-            <div className="border-t border-slate-200"></div>
+            <div className="border-t border-slate-200 dark:border-gray-800"></div>
 
-            {/* ============ SECTION 2: HOW WE USE YOUR INFORMATION ============ */}
+            {/* SECTION 2: HOW WE USE YOUR INFORMATION */}
             <motion.section
               id="how-we-use"
               custom={1}
@@ -316,11 +296,11 @@ export default function PrivacyPage() {
             >
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900">How We Use Your Information</h2>
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white">How We Use Your Information</h2>
                   <div className="mt-3 h-1 w-16 bg-linear-to-r from-[#8BC34A] to-transparent"></div>
                 </div>
 
-                <p className="text-lg leading-relaxed text-slate-700">
+                <p className="text-lg leading-relaxed text-slate-700 dark:text-gray-300">
                   We use the information we collect to:
                 </p>
 
@@ -349,7 +329,7 @@ export default function PrivacyPage() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="flex items-center text-slate-700"
+                        className="flex items-center text-slate-700 dark:text-gray-300"
                       >
                         <span className="mr-3 flex h-2 w-2 shrink-0 rounded-full bg-[#8BC34A]"></span>
                         {item}
@@ -360,10 +340,9 @@ export default function PrivacyPage() {
               </div>
             </motion.section>
 
-            {/* Divider */}
-            <div className="border-t border-slate-200"></div>
+            <div className="border-t border-slate-200 dark:border-gray-800"></div>
 
-            {/* ============ SECTION 3: INFORMATION SHARING ============ */}
+            {/* SECTION 3: INFORMATION SHARING */}
             <motion.section
               id="information-sharing"
               custom={2}
@@ -375,11 +354,11 @@ export default function PrivacyPage() {
             >
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900">Information Sharing</h2>
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Information Sharing</h2>
                   <div className="mt-3 h-1 w-16 bg-linear-to-r from-[#8BC34A] to-transparent"></div>
                 </div>
 
-                <p className="text-lg leading-relaxed text-slate-700">
+                <p className="text-lg leading-relaxed text-slate-700 dark:text-gray-300">
                   We do not sell your personal information. We may share your information in the following
                   circumstances:
                 </p>
@@ -390,7 +369,7 @@ export default function PrivacyPage() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="rounded-lg border-l-4 border-[#8BC34A] bg-white p-6 shadow-sm"
+                  className="rounded-lg border-l-4 border-[#8BC34A] bg-white dark:bg-[#1c2a0f] p-6 shadow-sm"
                 >
                   <ul className="space-y-2">
                     {[
@@ -407,7 +386,7 @@ export default function PrivacyPage() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="flex items-start text-slate-700"
+                        className="flex items-start text-slate-700 dark:text-gray-300"
                       >
                         <span className="mr-3 mt-1.5 shrink-0 text-[#8BC34A]">▸</span>
                         <span>{item}</span>
@@ -418,10 +397,9 @@ export default function PrivacyPage() {
               </div>
             </motion.section>
 
-            {/* Divider */}
-            <div className="border-t border-slate-200"></div>
+            <div className="border-t border-slate-200 dark:border-gray-800"></div>
 
-            {/* ============ SECTION 4: DATA SECURITY ============ */}
+            {/* SECTION 4: DATA SECURITY */}
             <motion.section
               id="data-security"
               custom={3}
@@ -433,7 +411,7 @@ export default function PrivacyPage() {
             >
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900">Data Security</h2>
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Data Security</h2>
                   <div className="mt-3 h-1 w-16 bg-linear-to-r from-[#8BC34A] to-transparent"></div>
                 </div>
 
@@ -443,13 +421,13 @@ export default function PrivacyPage() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  className="space-y-4 rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+                  className="space-y-4 rounded-lg border border-slate-200 dark:border-gray-800 bg-white dark:bg-[#1c2a0f] p-6 shadow-sm"
                 >
-                  <p className="text-slate-700">
+                  <p className="text-slate-700 dark:text-gray-300">
                     We implement appropriate technical and organizational measures to protect your personal
                     information against unauthorized access, alteration, disclosure, or destruction.
                   </p>
-                  <p className="text-slate-700">
+                  <p className="text-slate-700 dark:text-gray-300">
                     However, no method of transmission over the internet or electronic storage is 100% secure,
                     so we cannot guarantee absolute security.
                   </p>
@@ -457,10 +435,9 @@ export default function PrivacyPage() {
               </div>
             </motion.section>
 
-            {/* Divider */}
-            <div className="border-t border-slate-200"></div>
+            <div className="border-t border-slate-200 dark:border-gray-800"></div>
 
-            {/* ============ SECTION 5: YOUR RIGHTS AND CHOICES ============ */}
+            {/* SECTION 5: YOUR RIGHTS AND CHOICES */}
             <motion.section
               id="your-rights"
               custom={4}
@@ -472,11 +449,11 @@ export default function PrivacyPage() {
             >
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900">Your Rights and Choices</h2>
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Your Rights and Choices</h2>
                   <div className="mt-3 h-1 w-16 bg-linear-to-r from-[#8BC34A] to-transparent"></div>
                 </div>
 
-                <p className="text-lg leading-relaxed text-slate-700">You have the right to:</p>
+                <p className="text-lg leading-relaxed text-slate-700 dark:text-gray-300">You have the right to:</p>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   {[
@@ -494,7 +471,7 @@ export default function PrivacyPage() {
                       initial="hidden"
                       whileInView="visible"
                       viewport={{ once: true }}
-                      className="flex items-start rounded-lg bg-linear-to-br from-[#8BC34A]/5 to-transparent p-4"
+                      className="flex items-start rounded-lg bg-linear-to-br from-[#8BC34A]/5 to-transparent dark:from-[#8BC34A]/10 p-4"
                     >
                       <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#8BC34A]/30">
                         <svg
@@ -509,17 +486,16 @@ export default function PrivacyPage() {
                           />
                         </svg>
                       </div>
-                      <span className="ml-3 text-slate-700">{right}</span>
+                      <span className="ml-3 text-slate-700 dark:text-gray-300">{right}</span>
                     </motion.div>
                   ))}
                 </div>
               </div>
             </motion.section>
 
-            {/* Divider */}
-            <div className="border-t border-slate-200"></div>
+            <div className="border-t border-slate-200 dark:border-gray-800"></div>
 
-            {/* ============ SECTION 6: CONTACT US ============ */}
+            {/* SECTION 6: CONTACT US */}
             <motion.section
               id="contact-us"
               custom={5}
@@ -531,30 +507,29 @@ export default function PrivacyPage() {
             >
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-3xl font-bold text-slate-900">Contact Us</h2>
+                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Contact Us</h2>
                   <div className="mt-3 h-1 w-16 bg-linear-to-r from-[#8BC34A] to-transparent"></div>
                 </div>
 
-                <p className="text-lg leading-relaxed text-slate-700">
+                <p className="text-lg leading-relaxed text-slate-700 dark:text-gray-300">
                   If you have any questions about this Privacy Policy, please contact us at:
                 </p>
 
                 <div className="grid gap-4 sm:grid-cols-2">
-                  {/* Email Contact Card */}
                   <motion.div
                     custom={0}
                     variants={cardVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#8BC34A] hover:shadow-md"
+                    className="rounded-lg border border-slate-200 dark:border-gray-800 bg-white dark:bg-[#1c2a0f] p-6 shadow-sm transition-all duration-300 hover:border-[#8BC34A] hover:shadow-md"
                   >
                     <div className="flex items-center">
                       <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#8BC34A]/20">
                         <Mail className="h-6 w-6 text-[#8BC34A]" />
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium text-slate-500">Email</p>
+                        <p className="text-sm font-medium text-slate-500 dark:text-gray-400">Email</p>
                         <Link
                           href="mailto:privacy@waypel.com"
                           className="text-lg font-semibold text-[#8BC34A] transition-colors hover:text-[#7CB32E]"
@@ -565,22 +540,21 @@ export default function PrivacyPage() {
                     </div>
                   </motion.div>
 
-                  {/* Address Contact Card */}
                   <motion.div
                     custom={1}
                     variants={cardVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#8BC34A] hover:shadow-md"
+                    className="rounded-lg border border-slate-200 dark:border-gray-800 bg-white dark:bg-[#1c2a0f] p-6 shadow-sm transition-all duration-300 hover:border-[#8BC34A] hover:shadow-md"
                   >
                     <div className="flex items-center">
                       <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#8BC34A]/20">
                         <MapPin className="h-6 w-6 text-[#8BC34A]" />
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium text-slate-500">Address</p>
-                        <p className="text-lg font-semibold text-slate-900">Waypel Privacy Team</p>
+                        <p className="text-sm font-medium text-slate-500 dark:text-gray-400">Address</p>
+                        <p className="text-lg font-semibold text-slate-900 dark:text-white">Waypel Privacy Team</p>
                       </div>
                     </div>
                   </motion.div>
@@ -588,7 +562,7 @@ export default function PrivacyPage() {
               </div>
             </motion.section>
 
-            {/* ============ FOOTER CTA ============ */}
+            {/* FOOTER CTA */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -597,8 +571,8 @@ export default function PrivacyPage() {
               className="mt-16 rounded-lg border border-[#8BC34A]/30 bg-linear-to-br from-[#8BC34A]/10 to-transparent p-8"
             >
               <div className="space-y-4 text-center">
-                <h3 className="text-2xl font-bold text-slate-900">Privacy Concerns?</h3>
-                <p className="text-slate-700">
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Privacy Concerns?</h3>
+                <p className="text-slate-700 dark:text-gray-300">
                   We take your privacy seriously. If you have any concerns or questions, please don&apos;t hesitate
                   to reach out to our support team.
                 </p>
@@ -632,7 +606,7 @@ export default function PrivacyPage() {
         </main>
       </div>
 
-      {/* ============ BACK TO TOP BUTTON ============ */}
+      {/* BACK TO TOP BUTTON */}
       <AnimatePresence>
         {showBackToTop && (
           <motion.button
