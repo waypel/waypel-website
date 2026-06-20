@@ -2,27 +2,70 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0c1206;
+  --primary: #8BC34A;
+  --primary-hover: #7CB32E;
+  --primary-light: #f0f7e6;
+  --dark-bg: #111a08;
+  --dark-card: #1c2a0f;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--primary-light);
+  --color-dark-bg: var(--dark-bg);
+  --color-dark-card: var(--dark-card);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-}
-
-/* Prevent layout shift when scrollbars appear/disappear and avoid horizontal overflow */
-html {
-  scrollbar-gutter: stable;
-}
-
-body {
   overflow-x: hidden;
 }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Selection style */
+::selection {
+  background-color: rgba(139, 195, 74, 0.25);
+  color: #0c1206;
+}
+
+/* Smooth ambient mesh background pattern */
+.bg-mesh-glow {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(139, 195, 74, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(139, 195, 74, 0.05) 0px, transparent 50%);
+}
+

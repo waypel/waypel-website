@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 const creatorsSteps = [
   {
@@ -48,83 +49,63 @@ const learnersSteps = [
   },
 ];
 
-function CreatorCard({ image, title, description, overlay = false, isFirst = false }: { image: string; title: string; description: string; overlay?: boolean; isFirst?: boolean }) {
-  const titleStyle = {
-    width: "100%",
-    maxWidth: "354.67px",
-    fontSize: "24px",
-    fontWeight: 700,
-    font: "Oxygen",
-    lineHeight: "32px",
-    letterSpacing: "0%",
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
     opacity: 1,
-  } as const;
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.5,
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+    },
+  }),
+};
 
-  if (overlay) {
-    return (
-      <article className="flex flex-col justify-between rounded-2xl h-full overflow-hidden" style={{ backgroundColor: "#f0f7e6" }}>
-        <div className="p-6 flex flex-col gap-3 text-center items-center">
-          <h3 className="text-[#00080A] text-left" style={titleStyle}>{title}</h3>
-          <p className="text-left text-base text-[#00080A] leading-7">{description}</p>
-        </div>
-        <div className="w-full h-91.75 relative">
-          <Image src={image} alt={title} fill sizes="(max-width: 200px) 100vw, 33vw" className="object-contain" />
-        </div>
-      </article>
-    );
-  }
 
+function CreatorCard({ image, title, description, index }: { image: string; title: string; description: string; index: number }) {
   return (
-    <article className="flex flex-col rounded-2xl overflow-hidden" style={{ backgroundColor: "#f0f7e6" }}>
-      <div className="w-86 h-91.75 relative mt-10 overflow-hidden mx-auto">
-        <Image src={image} alt={title} fill sizes="(max-width: 200px) 100vw, 33vw"  />
+    <motion.article
+      variants={cardVariants}
+      custom={index}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(139, 195, 74, 0.18)", borderColor: "rgba(139, 195, 74, 0.3)" }}
+      className="flex flex-col justify-between rounded-3xl overflow-hidden border border-[#8BC34A]/10 bg-[#f0f7e6] h-full shadow-xs transition-colors duration-300"
+    >
+      <div className="p-8 flex flex-col gap-3">
+        <h3 className="text-gray-900 text-xl font-bold tracking-tight">{title}</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
       </div>
-      <div className="p-6 flex flex-col gap-3 text-center">
-        <h3 className="text-[#00080A] text-left" style={titleStyle}>{title}</h3>
-        <p className="text-left text-base text-[#00080A] leading-7">{description}</p>
+      <div className="w-full h-72 relative mt-4">
+        <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain object-bottom" />
       </div>
-    </article>
+    </motion.article>
   );
 }
 
-function LearnerCard({ image, title, description, overlay = false, isFirst = false }: { image: string; title: string; description: string; overlay?: boolean; isFirst?: boolean }) {
-  const titleStyle = {
-    width: "100%",
-    maxWidth: "354.67px",
-    fontSize: "24px",
-    fontWeight: 700,
-    font: "Oxygen",
-    lineHeight: "32px",
-    letterSpacing: "0%",
-    opacity: 1,
-  } as const;
-
-  if (overlay) {
-    return (
-      <article className="flex flex-col justify-between rounded-2xl h-full overflow-hidden" style={{ backgroundColor: "#f0f7e6" }}>
-        <div className="p-6 flex flex-col gap-3 text-center items-center">
-          <h3 className="text-[#00080A] text-left" style={titleStyle}>{title}</h3>
-          <p className="text-left text-base text-[#00080A] leading-7">{description}</p>
-        </div>
-        <div className="w-full h-91.75 relative">
-          <Image src={image} alt={title} fill sizes="(max-width: 200px) 100vw, 33vw" className="object-contain" />
-        </div>
-      </article>
-    );
-  }
-
+function LearnerCard({ image, title, description, index }: { image: string; title: string; description: string; index: number }) {
   return (
-    <article className="flex flex-col rounded-2xl overflow-hidden" style={{ backgroundColor: "#f0f7e6" }}>
-      <div className="w-86 h-91.75 mt-10 relative overflow-hidden mx-auto">
-        <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-top" />
+    <motion.article
+      variants={cardVariants}
+      custom={index}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(139, 195, 74, 0.18)", borderColor: "rgba(139, 195, 74, 0.3)" }}
+      className="flex flex-col justify-between rounded-3xl overflow-hidden border border-[#8BC34A]/10 bg-[#f0f7e6] h-full shadow-xs transition-colors duration-300"
+    >
+      <div className="p-8 flex flex-col gap-3">
+        <h3 className="text-gray-900 text-xl font-bold tracking-tight">{title}</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
       </div>
-      <div className="p-6 flex flex-col gap-3 text-center">
-        <h3 className="text-[#00080A] text-left" style={titleStyle}>{title}</h3>
-        <p className="text-left text-base text-[#00080A] leading-7" >
-          {description}
-        </p>
+      <div className="w-full h-72 relative mt-4">
+        <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-contain object-bottom" />
       </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -134,54 +115,82 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="bg-white w-full"
-      style={{ width: "100%", maxWidth: "1455px", margin: "0 auto", minHeight: "600px", padding: "100px 20px" }}
+      className="bg-white w-full py-24 px-4 sm:px-6 relative overflow-hidden"
     >
-      <div className="flex flex-col items-center" style={{ gap: "90px" }}>
+      {/* Decorative Blur Orbs */}
+      <div className="absolute -left-20 top-1/2 w-80 h-80 bg-emerald-100/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute -right-20 top-1/4 w-80 h-80 bg-[#8BC34A]/5 rounded-full blur-3xl -z-10" />
 
-        {/* Heading + Toggle: 566x167, 48px gap */}
-        <div
-          className="flex flex-col items-center mt--100"
-          style={{ width: "100%", maxWidth: "566px", minHeight: "167px", gap: "48px" }}
-        >
-          <h2 className=" ['Oxygen'] text-3xl sm:text-6xl font-bold text-center text-black m-0">
+      <div className="max-w-7xl mx-auto flex flex-col items-center gap-16">
+        
+        {/* Heading + Toggle */}
+        <div className="flex flex-col items-center gap-8 max-w-2xl">
+          <h2 className="text-4xl sm:text-6xl font-black text-center text-black tracking-tight leading-none">
             How Waypel works
           </h2>
 
-          {/* Tab Toggle */}
-          <div className="flex bg-black rounded-full p-1 gap-1">
+          {/* Sliding Tab Toggle */}
+          <div className="flex bg-[#0c1206] rounded-full p-1.5 relative z-0">
             {(["creators", "learners"] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-colors duration-250 relative z-10 cursor-pointer ${
                   tab === t
-                    ? "bg-[#8BC34A] text-white shadow-sm"
+                    ? "text-white"
                     : "text-gray-400 hover:text-white"
                 }`}
                 aria-pressed={tab === t}
               >
+                {tab === t && (
+                  <motion.span
+                    layoutId="activeTabIndicator"
+                    className="absolute inset-0 bg-[#8BC34A] rounded-full -z-10 shadow-md"
+                    transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                  />
+                )}
                 For {t.charAt(0).toUpperCase() + t.slice(1)}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Steps Grid */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-3 mx-auto"
-          style={{ width: "100%", maxWidth: "1240px", minHeight: "618px", gap: "16px" }}
-        >
-          {tab === "creators"
-            ? creatorsSteps.map((step, i) => (
-                <CreatorCard key={i} image={step.image} title={step.title} description={step.description} overlay={i === 1} isFirst={i === 0} />
-              ))
-            : learnersSteps.map((step, i) => (
-                <LearnerCard key={i} image={step.image} title={step.title} description={step.description} overlay={i === 1} isFirst={i === 0} />
-              ))}
+        {/* Steps Grid with AnimatePresence */}
+        <div className="w-full max-w-6xl min-h-[550px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={tab}
+              initial={{ opacity: 0, x: tab === "creators" ? -20 : 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: tab === "creators" ? 20 : -20 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            >
+              {tab === "creators"
+                ? creatorsSteps.map((step, i) => (
+                    <CreatorCard 
+                      key={`creator-${i}`} 
+                      image={step.image} 
+                      title={step.title} 
+                      description={step.description} 
+                      index={i} 
+                    />
+                  ))
+                : learnersSteps.map((step, i) => (
+                    <LearnerCard 
+                      key={`learner-${i}`} 
+                      image={step.image} 
+                      title={step.title} 
+                      description={step.description} 
+                      index={i} 
+                    />
+                  ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>
     </section>
   );
 }
+

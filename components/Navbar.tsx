@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -14,25 +15,61 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  
   const pathname = usePathname();
   const isContactPage = !!pathname && (pathname === "/contact" || pathname.startsWith("/contact/"));
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? "bg-white/80 backdrop-blur-md border-b border-gray-100/50 shadow-xs h-16" 
+          : "bg-white/95 md:bg-transparent h-20"
+      }`}
+    >
       <nav
-        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20"
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full"
         aria-label="Main navigation"
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center text-gray-900">
-          <Image src="/Logo (1).png" alt="Waypel logo" width={160.31} height={42.85} className="rounded-full" />
+        <Link href="/" className="flex items-center text-gray-900 transition-transform duration-300 hover:scale-102">
+          <Image src="/Logo (1).png" alt="Waypel logo" width={140} height={37.4} className="rounded-full" />
         </Link>
 
-        {/* Desktop Links */}
-        <ul className="hidden md:flex items-center gap-12 text-sm">
-          {navLinks.map((link) => (
-            <li key={link.label}>
-              <a href={link.href} className="hover:text-[#8BC34A] transition-colors text-black">
+        {/* Desktop Links with Sliding Hover Effect */}
+        <ul className="hidden md:flex items-center gap-1 text-sm font-medium">
+          {navLinks.map((link, idx) => (
+            <li 
+              key={link.label}
+              className="relative py-2 px-4"
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              {hoveredIndex === idx && (
+                <motion.span
+                  layoutId="navHover"
+                  className="absolute inset-0 bg-[#8BC34A]/10 rounded-full z-0"
+                  transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                />
+              )}
+              <a 
+                href={link.href} 
+                className="relative z-10 text-gray-700 hover:text-[#8BC34A] transition-colors duration-200"
+              >
                 {link.label}
               </a>
             </li>
@@ -41,24 +78,35 @@ export default function Navbar() {
 
         {/* CTA */}
         {isContactPage ? (
-          <div className="hidden md:inline-flex items-center px-4 py-2 rounded-full border border-transparent text-sm font-medium text-transparent" />
+          <div className="hidden md:inline-flex items-center px-5 py-2 rounded-full text-sm text-transparent" />
         ) : (
-          <Link
-            href="/contact"
-            className="hidden md:inline-flex items-center px-4 py-2 rounded-full border border-[#8BC34A] text-sm font-medium text-gray-800 hover:bg-[#8BC34A] transition-colors"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="hidden md:block"
           >
-            Contact Us
-          </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center px-5 py-2.5 rounded-full border border-[#8BC34A] text-sm font-semibold text-gray-800 hover:bg-[#8BC34A] hover:text-white transition-all duration-300 shadow-xs hover:shadow-md hover:shadow-[#8BC34A]/10"
+            >
+              Contact Us
+            </Link>
+          </motion.div>
         )}
 
         {/* Mobile burger */}
         <button
-          className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900"
+          className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 focus:outline-none"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
           aria-expanded={open}
         >
-          <svg className={`w-5 h-5 transform transition-transform duration-300 ${open ? 'rotate-90' : 'rotate-0'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg 
+            className="w-6 h-6 transform transition-transform duration-300" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
             {open ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -69,43 +117,55 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile menu: blurred backdrop + sliding panel */}
-      <div className={`md:hidden fixed inset-x-0 top-20 z-40 ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}>
-        {/* Backdrop (click to close) */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`}
-          onClick={() => setOpen(false)}
-          aria-hidden
-        >
-          <div className="w-full h-full backdrop-blur-sm bg-black/20" />
-        </div>
+      <AnimatePresence>
+        {open && (
+          <div className="md:hidden fixed inset-0 top-16 z-40">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 backdrop-blur-xs bg-black/10"
+              onClick={() => setOpen(false)}
+            />
 
-        {/* Sliding panel */}
-        <div className={`relative mx-4 my-3 transform transition-transform duration-300 ${open ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}>
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100">
-            <div className="p-4 flex flex-col gap-3">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm font-medium text-black hover:text-[#8BC34A] transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-              {!isContactPage && (
-                <Link
-                  href="/contact"
-                  className="mt-2 text-center px-4 py-2 rounded-full border hover:text-[#8BC34A] border-[#8BC34A] text-sm font-medium text-gray-800 hover:bg-[#8BC34A] transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  Contact us
-                </Link>
-              )}
-            </div>
+            {/* Sliding Panel */}
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="relative mx-4 my-3"
+            >
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                <div className="p-5 flex flex-col gap-4">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className="text-base font-semibold text-gray-800 hover:text-[#8BC34A] transition-colors py-1"
+                      onClick={() => setOpen(false)}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                  {!isContactPage && (
+                    <Link
+                      href="/contact"
+                      className="mt-2 text-center py-2.5 rounded-full border border-[#8BC34A] text-sm font-semibold text-gray-800 hover:bg-[#8BC34A] hover:text-white transition-colors"
+                      onClick={() => setOpen(false)}
+                    >
+                      Contact us
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      </div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
+

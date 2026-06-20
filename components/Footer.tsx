@@ -1,14 +1,15 @@
 "use client";
 
-const footerLinks = [
-  { label: "About us", href: "#about" },
-  { label: "Features", href: "#features" },
-  { label: "How it Works", href: "#how-it-works" },
-  { label: "Contact us", href: "/contact" },
-];
-
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+const footerLinks = [
+  { label: "About us", href: "/#about" },
+  { label: "Features", href: "/#features" },
+  { label: "How it Works", href: "/#how-it-works" },
+  { label: "Contact us", href: "/contact" },
+];
 
 const legalLinks = [
   { label: "Privacy Policy", href: "/privacy-policy" },
@@ -17,21 +18,21 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-100 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <footer className="bg-white border-t border-gray-100 overflow-hidden relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 relative z-10">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 font-bold text-gray-900">
-            <Image src="/logo.png" alt="Waypel logo" width={160.31} height={42.85} className="rounded-full" />
-    
-          </a>
+          <Link href="/" className="flex items-center gap-2 font-bold text-gray-900 transition-transform duration-300 hover:scale-102">
+            <Image src="/logo.png" alt="Waypel logo" width={140} height={37.4} className="rounded-full" />
+          </Link>
 
           {/* Links */}
           <nav aria-label="Footer navigation">
-            <ul className="flex flex-wrap gap-8 text-sm text-black-">
+            <ul className="flex flex-wrap gap-8 text-sm font-semibold text-gray-600">
               {footerLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="hover:text-[#8BC34A] transition-colors">
+                  <Link href={link.href} className="hover:text-[#8BC34A] transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -42,11 +43,13 @@ export default function Footer() {
           {/* Social Icons */}
           <div className="flex items-center gap-3" aria-label="Social media links">
             {["Twitter", "Facebook", "Instagram"].map((social) => (
-              <a
+              <motion.a
                 key={social}
                 href="#"
                 aria-label={social}
-                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-black-500 hover:bg-gray-200 transition-colors"
+                whileHover={{ scale: 1.12, backgroundColor: "rgba(139, 195, 74, 0.15)", color: "#8BC34A" }}
+                whileTap={{ scale: 0.95 }}
+                className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500 transition-all duration-300"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   {social === "Twitter" && (
@@ -59,30 +62,31 @@ export default function Footer() {
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                   )}
                 </svg>
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-100 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-black-400">
+        <div className="border-t border-gray-100 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold text-gray-400">
           <span>© Copyright 2024. All Rights Reserved</span>
-          <div className="flex gap-4">
+          <div className="flex gap-6">
             {legalLinks.map((link) => (
-              <a key={link.label} href={link.href} className="hover:text-[#8BC34A] transition-colors">
+              <Link key={link.label} href={link.href} className="hover:text-[#8BC34A] transition-colors duration-200">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Large Watermark */}
-      <div className="overflow-hidden" aria-hidden="true">
-        <p className="font-bold text-center leading-[358.1px] tracking-[-11.19px] text-[358.1px]">
+      {/* Large Watermark - Styled subtle */}
+      <div className="overflow-hidden select-none pointer-events-none opacity-[0.03] absolute bottom-[-40px] left-0 right-0 z-0" aria-hidden="true">
+        <p className="font-black text-center leading-none tracking-tighter text-[220px] sm:text-[320px] text-gray-900">
           Waypel
         </p>
       </div>
     </footer>
   );
 }
+
